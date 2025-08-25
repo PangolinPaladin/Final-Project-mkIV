@@ -1,0 +1,12 @@
+.linkList {
+  margin: 0;
+  padding: 0;
+}
+
+.linkLink {
+  font-size: 2rem;
+}
+
+.linkLink:hover {
+  color: chartreuse;
+}

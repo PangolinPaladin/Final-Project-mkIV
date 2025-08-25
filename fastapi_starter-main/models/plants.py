@@ -11,9 +11,7 @@ class Plants(Base, table=True):
     # this may need to be adjusted to return the chosen date
     location_of_purchase: str
     condition_of_purchase: str
-
     current_condition: str
-    last_maintenance: str
 
     # future adds would be container material and water date 
     
