@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 const Header = () => {
   return (
     <header className={styles.header}>
-      <h1>SHRINK RAY!</h1>
+      <h1>Plant Tracker</h1>
       <nav className={styles.nav}>
         <ul>
           <li>
@@ -24,5 +24,3 @@ const Header = () => {
 
 export default Header;
 
-// this is currently broken, I feel like I should be having to dig into other folders,
-//  so ../src/pages.jsx but maybe not. 

@@ -8,7 +8,7 @@ from sqlmodel import Session, select
 
 import config
 
-from models.stuff import Stuff
+from models.plants import Plants
 
 from db import get_session
 
@@ -35,34 +35,59 @@ async def root():
 # READ data
 
 
-@app.get("/stuff")
-async def get_all_stuff(session: Session = Depends(get_session)):
-    statement = select(Stuff)
-    results = session.exec(statement).all()
-    return results
+@app.get("/plants")
+async def get_all_plants(session: Session = Depends(get_session)):
+    statement = select(Plants)
+    giveResults = session.exec(statement).all()
+    return giveResults
 
 # READ specific data
 
 
-@app.get("/stuff/{id}")
-async def get_single_stuff(id: str, session: Session = Depends(get_session)):
-    statement = select(Stuff).where(Stuff.id == id)
+@app.get("/plants/{id}")
+async def get_single_plant(id: str, session: Session = Depends(get_session)):
+    statement = select(Plants).where(Plants.id == id)
     result = session.exec(statement).one()
     return result
 
 # CREATE data
 
 
-@app.post("/stuff/add")
-async def add_stuff(payload: Stuff, session: Session = Depends(get_session)):
-    new_stuff = Stuff(title=payload.title, description=payload.description)
-    session.add(new_stuff)
+@app.post("/plants/add")
+async def add_plants(payload: Plants, session: Session = Depends(get_session)):
+    new_plant = Plants(
+        title=payload.title, 
+        common_name=payload.common_name,
+        scientific_name=payload.scientific_name,
+        date_of_purchase=payload.date_of_purchase,
+        location_of_purchase=payload.location_of_purchase,
+        condition_at_purchase=payload.condition_at_purchase,
+        current_condition=payload.current_condition)
+    session.add(new_plant)
     session.commit()
-    session.refresh(new_stuff)
-    return {"message": f"Added new stuff with ID: {new_stuff.id}"}
+    session.refresh(new_plant)
+    return {"message": f"Congratulations on your new plant! {new_plant.id}"}
+
+@app.post("/create")
+async def create_todo(
+    text: str, 
+    is_complete: bool = False):
+    todo = Todo(text=text, is_done=is_complete)
+    session.add(todo)
+    session.commit()
+    return {"todo added": todo.text}
 
 if __name__ == '__main__':
     uvicorn.run('main:app', 
     host='localhost', 
     port=8000, 
     reload=True)
+
+
+    # common_name: str
+    # scientific_name: str
+    # date_of_purchase: date 
+    # this may need to be adjusted to return the chosen date
+    # location_of_purchase: str
+    # condition_at_purchase: str
+    # current_condition: str
