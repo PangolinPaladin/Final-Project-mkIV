@@ -20,5 +20,3 @@ function App() {
 }
 
 export default App;
-
-//Having trouble with the router. ... not sure why
