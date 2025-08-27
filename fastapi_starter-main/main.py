@@ -8,7 +8,16 @@ from sqlmodel import Session, select
 
 import config
 
-from models.plants import Plants
+from models.Plant import Plants
+
+from models.CommonName import CommonName
+from models.LocationPurchased import LocationPurchased
+from models.CurrentCondition import CurrentCondition
+from models.ScientificName import ScientificName
+from models.PurchasedCondition import PurchasedCondition
+from models.DatePurchased import DatePurchased
+
+
 
 from db import get_session
 
@@ -53,16 +62,16 @@ async def root():
 #try again. 
 @app.get("/plants")
 async def get_all_plants(session: Session = Depends(get_session)):
-   statement= select(Plants, commonName).join(commonName, Plants.commonname_id == commonName.id).join(locationPurchased, Plants.locationpurchased_id ==locationPurchased.id)
+   statement= select(Plants, CommonName, LocationPurchased).join(CommonName, Plants.commonname_id == CommonName.id).join(LocationPurchased, Plants.locationpurchased_id ==LocationPurchased.id)
    giveResults = session.exec(statement).all()
    
    result_list = []
    for plant, common_name, location_purchased in giveResults:
        plant_details = {
-           "common_name": plant.commonname_id,
-           "location_purchased": location_purchased.locationpurchased,
+           "common_name": common_name.name,
+           "location_purchased": location_purchased.location,
        }
-       result_list.append(plant_details)
+       result_list.append(plant_details),
        return result_list
 
 # READ specific data

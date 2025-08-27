@@ -1,6 +1,6 @@
 from .base import Base
 
 class CommonName(Base, table=True):
-    __tablename__ = "commonname_id"
+    __tablename__ = "commonname"
 
-    commonName: str
+    name: str
