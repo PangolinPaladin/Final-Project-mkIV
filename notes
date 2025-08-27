@@ -73,4 +73,9 @@ Starting D-Day. 08.27.
     Good Grief. I found it! You can actually navigate to the page. You know where it wasn't? Navbar.
 
     Need some Photos. 
+    Okay. After WAY TO LONG. I cannot find a pattern for the stupid navbar. I think the only realistic way to
+    do it is to just break it into a new componant, which I hate, 
+    I love the cleanliness, but more names and links, is more things to misspell. 
+    WELL. so [Header] had text-align center, and 
+    I think it was killing any changes I tried to do for menu. 
     

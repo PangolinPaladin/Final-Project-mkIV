@@ -1,0 +1,23 @@
+Meet_The_Creator {
+}
+html, body {
+
+.main-container {
+            display: flex;
+            flex: 2;
+            flex-direction: row;
+            background: #d6290e;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #f6f7fb;
+}
+.right-container {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    background: #2062a4;
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid #e8ede9;
+}
+}

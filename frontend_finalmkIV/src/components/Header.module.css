@@ -3,23 +3,21 @@ header {
     color: rgb(213, 239, 200);
     box-sizing: border-box;
     font-size: larger;
-    text-align: center;
     font-weight: bold;
     border-left: 4px solid rgb(213, 239, 200);
     border-bottom: 2px solid rgb(213, 239, 200);
 
-}
-main-container {
-    text-justify: start;
-    border-bottom: 1px solid rgb(213, 239, 200);
 
 }
-
-full-collection-container {
-    text-justify: center;
-    border-bottom: 1px solid rgb(213, 239, 200);
+h1 {
+    text-align: center;
 }
+menu {
+    text-align: center;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    
+    
 
-new-plant-container {
-    text-justify: right;
 }
