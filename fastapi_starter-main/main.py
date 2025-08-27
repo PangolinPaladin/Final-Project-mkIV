@@ -68,7 +68,7 @@ async def get_all_plants(session: Session = Depends(get_session)):
        plant_details = {
            "common_name": common_name.name,
            "current_condition": current_condition.condition,
-           "date_purchased": date_purchased.date,
+           "date_purchased": date_purchased.datepurchased,
            "location_purchased": location_purchased.location,
            "purchased_condition": purchased_condition.history,
            "scientific_name": scientific_name.latinName,
