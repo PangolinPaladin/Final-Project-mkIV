@@ -26,4 +26,41 @@ Front end is up, and running, no work done yet. Just an empty page ready for dre
 
     Alright. I have tried everything. Still will not give me queries. I tried colons (like in the class code-along), nothing. the github example, nothing. Mattermost website, nothing. 
 
-    
+    0826
+    Man do I love life. Fucking fuck fuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuck
+    28 minutes into using the pattern, nothing is fucking fucking shithole working. HOW. HOW CAN YOU FUKCING NOT FIND THE FUCKING SCIENTIFIC NAME!
+    it worked on his machine, same fucking code same fucking system. 
+    fuck. 
+    FUCK.
+    How am I supposed to follow the pattern and not understand the inner workings if the pattern is busted.
+    Fuck.
+
+    get plant by id still works. 
+
+    I guess we try to find another, narrow down why ScientificName is being stupid. Or I am. 
+
+    Good grief. Now API won't even load because of indent expectations. Finding new ways to fail every minute!
+
+    Sorta fixed the indent (moved up into the previous line, 
+    annoying since I DO NOT like the usability of that. but it won't accept a semi colon or comma)
+    So it doesn't recognise commonName. 
+
+    At this point I am wasting time, I have tried at least 4 different ways, and cannot rectify. I hate this. 
+    Well, CSS has to happen at some point. 
+    My god the way we learned this is brutal. with everything being seperated and phrased weird pattern recognition is NOT A THING. 
+    Lot of work needed here, look in depth at CSS after DDAY. 
+    I wanted to add a Navbar, make it a separate element, but decided against, it would require a lot of name changing, not worth the risk. 
+
+    I like the footer better, but I CANNOT get the links to move. UGH.
+
+    Holy cow this is confusing. I cannot, for the life of me affect the menu, but all of a sudden if I delete the container, 
+    which won't accpet commands, everything moves. text is still pink, despite everything I can find. 
+
+    internet says I should be having periods to start lines, If I add them it gets angry. 
+    So I am guessing this is maybe a jsx thing? my structure is jsx not html
+
+    Okay. So found a source that says you are required to 
+    return a single parent or it won't compile... is that my problem? 
+
+    comparing my file to the shrinkray shows something interesting, I had no body or main files... 
+    make sure not to put font in body

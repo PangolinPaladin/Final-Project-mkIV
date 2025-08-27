@@ -1,9 +1,11 @@
 .footer {
   align-items: center;
-  background-color: #5f9ea0;
-  color: #fff;
+  background-color: #1a3119;
+  color: #c7ecc6;
   display: flex;
   justify-content: center;
-  padding: 32px 16px;
+  padding:2px 7px;
   width: 100%;
+  font-style: italic;
+  font-family: "Fantasy", "Papyrus"
 }

@@ -1,5 +1,5 @@
 const Main = () => {
-  return <h2>Plant Tracker Home Page</h2>;
+  return <h2></h2>;
 };
 
 export default Main;

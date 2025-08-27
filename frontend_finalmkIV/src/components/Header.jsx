@@ -1,23 +1,21 @@
-import { Link } from 'react-router';
+import { Link, Navigate } from 'react-router';
 import styles from './Header.module.css';
 
 const Header = () => {
   return (
-    <header className={styles.header}>
+    <header TheHeader={styles.header}>
       <h1>Plant Tracker</h1>
-      <nav className={styles.nav}>
-        <ul>
-          <li>
-            <Link to='/'>Main</Link>
-          </li>
-          <li>
-            <Link to='/Full_Collection'>Full Collection</Link>
-          </li>
-          <li>
-            <Link to='/New_Plant'>New Plant</Link>
-          </li>
-        </ul>
-      </nav>
+        <menu>
+          <nav class= "main-container">
+            <li> <Link to='/'>Main</Link> </li>
+          </nav>
+          <nav class= "full-collection-container">
+              <li> <Link to='/Full_Collection'>Full Collection</Link> </li>
+          </nav >
+          <nav class= "new-plant-container">
+            <li> <Link to='/New_Plant'>New Plant</Link> </li> 
+          </nav>
+        </menu>
     </header>
   );
 };

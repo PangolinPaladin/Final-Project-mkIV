@@ -1,24 +1,25 @@
-.header {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: space-between;
-  margin: 0 auto 1rem;
-  padding: 16px;
+header {
+    font-family: "fantasy" "papyrus";
+    color: rgb(213, 239, 200);
+    box-sizing: border-box;
+    font-size: larger;
+    text-align: center;
+    font-weight: bold;
+    border-left: 4px solid rgb(213, 239, 200);
+    border-bottom: 2px solid rgb(213, 239, 200);
 
-  h1 {
-    margin: 0;
-  }
+}
+main-container {
+    text-justify: start;
+    border-bottom: 1px solid rgb(213, 239, 200);
+
 }
 
-.nav {
-  display: flex;
+full-collection-container {
+    text-justify: center;
+    border-bottom: 1px solid rgb(213, 239, 200);
+}
 
-  ul {
-    display: flex;
-    gap: 1rem;
-    list-style: none;
-    margin: 0;
-  }
+new-plant-container {
+    text-justify: right;
 }

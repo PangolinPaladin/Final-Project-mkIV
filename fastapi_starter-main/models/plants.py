@@ -2,16 +2,16 @@ from .base import Base
 from datetime import date
 
 
-class Plants(Base, table=True):
-    __tablename = "plants_overview"
 
-    common_name: str
-    scientific_name: str
-    date_of_purchase: date 
-    # this may need to be adjusted to return the chosen date
-    location_of_purchase: str
-    condition_at_purchase: str
-    current_condition: str
+class Plants(Base, table=True):
+    __tablename = "plants"
+
+commonname_id: str
+scientificname_id: str
+locationpurchased_id: str
+purchasedcondition_id: str
+datepurchased_id: str
+currentcondition_id: str
 
     # future adds would be container material and water date 
     

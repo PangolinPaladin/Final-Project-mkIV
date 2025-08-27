@@ -35,11 +35,35 @@ async def root():
 # READ data
 
 
+# @app.get("/plants")
+# async def get_all_plants(session: Session = Depends(get_session)):
+ #   statement = select(Plants, ScientificName).join(ScientificName, Plants.scientificname_id == ScientificName.id)
+  #  giveResults = session.exec(statement).all()
+
+   # result_list = []
+   # for plant, scientific_name in giveResults:
+    #    plant_details = {
+     #       "common_name": plant.commonname_id,
+      #      "scientific_name": scientific_name.latinname,
+       # }
+      #  result_list.append(plant_details)
+   # return result_list
+
+
+#try again. 
 @app.get("/plants")
 async def get_all_plants(session: Session = Depends(get_session)):
-    statement = select(Plants)
-    giveResults = session.exec(statement).all()
-    return giveResults
+   statement= select(Plants, commonName).join(commonName, Plants.commonname_id == commonName.id).join(locationPurchased, Plants.locationpurchased_id ==locationPurchased.id)
+   giveResults = session.exec(statement).all()
+   
+   result_list = []
+   for plant, common_name, location_purchased in giveResults:
+       plant_details = {
+           "common_name": plant.commonname_id,
+           "location_purchased": location_purchased.locationpurchased,
+       }
+       result_list.append(plant_details)
+       return result_list
 
 # READ specific data
 
@@ -57,16 +81,23 @@ async def get_single_plant(id: str, session: Session = Depends(get_session)):
 async def add_plants(payload: Plants, session: Session = Depends(get_session)):
     new_plant = Plants(
         title=payload.title, 
-        common_name=payload.common_name,
-        scientific_name=payload.scientific_name,
-        date_of_purchase=payload.date_of_purchase,
-        location_of_purchase=payload.location_of_purchase,
-        condition_at_purchase=payload.condition_at_purchase,
-        current_condition=payload.current_condition)
+        common_name_id=payload.common_name,
+        scientific_name_id=payload.scientific_name,
+        date_of_purchase_id=payload.date_of_purchase,
+        location_of_purchase_id=payload.location_of_purchase,
+        condition_at_purchase_id=payload.condition_at_purchase,
+        current_condition_id=payload.current_condition)
     session.add(new_plant)
     session.commit()
     session.refresh(new_plant)
     return {"message": f"Congratulations on your new plant! {new_plant.id}"}
+
+# commonname_id: str
+# scientificname_id: str
+# locationpurchased_id: str
+# purchasedcondition_id: str
+# datepurchased_id: str
+# currentcondition_id: str
 
 @app.post("/create")
 async def create_todo(
