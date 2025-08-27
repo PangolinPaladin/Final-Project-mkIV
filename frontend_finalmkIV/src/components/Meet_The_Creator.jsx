@@ -8,11 +8,11 @@ return (
         <>
         <div class="content-container">
             <div class="textbox">
-                <h2> Meet the Creator </>
+                <h2> Meet the Creator </h2>
                 <p>enter text here</p>
             </div>
             <div class="sidebar">
-                <h3> summer '25</h3>
+                {/* <h3></h3> */}
             </div>
         </div>
         </>

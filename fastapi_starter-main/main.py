@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 
 from datetime import datetime, timedelta, timezone
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 import config
 
@@ -60,9 +60,9 @@ async def root():
 
 @app.get("/plants")
 async def get_all_plants(session: Session = Depends(get_session)):
-    #statement= select(Plants, CommonName, CurrentCondition, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName, Plants.commonname_id == CommonName.id).join(CurrentCondition, Plants.currentcondition_id == CurrentCondition.id).join(LocationPurchased, Plants.locationpurchased_id ==LocationPurchased.id).join(PurchasedCondition, Plants.purchasedcondition_id ==PurchasedCondition.id).join(ScientificName, Plants.scientificname_id ==ScientificName.id
-    statement = select(Plants, CommonName, CurrentCondition, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName).join(CurrentCondition).join(
-        LocationPurchased).join(PurchasedCondition).join(ScientificName)
+    statement= select(Plants, CommonName, CurrentCondition, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName, Plants.commonname_id == CommonName.id).join(CurrentCondition, Plants.currentcondition_id == CurrentCondition.id).join(LocationPurchased, Plants.locationpurchased_id ==LocationPurchased.id).join(PurchasedCondition, Plants.purchasedcondition_id ==PurchasedCondition.id).join(ScientificName, Plants.scientificname_id ==ScientificName.id)
+    #statement = select(Plants, CommonName, CurrentCondition, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName).join(CurrentCondition).join(
+        #LocationPurchased).join(PurchasedCondition).join(ScientificName)
     giveResults = session.exec(statement).all()
    
     result_list = []
@@ -87,21 +87,27 @@ async def get_single_plant(id: str, session: Session = Depends(get_session)):
     statement = select(Plants, CommonName, CurrentCondition, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName).join(CurrentCondition).join(
         LocationPurchased).join(PurchasedCondition).join(ScientificName).where(Plants.id == id)
     result = session.exec(statement).one()
+    plant, common_name, current_condition, location_purchased, purchased_condition, scientific_name = result
+    return result
+
+
+@app.get("/singleplants/{id}")
+async def get_single_plant(id: str, session: Session = Depends(get_session)):
+    statement = select(Plants).where(Plants.id == id)
+    statement = select(Plants, CommonName, CurrentCondition, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName).join(CurrentCondition).join(
+        LocationPurchased).join(PurchasedCondition).join(ScientificName).where(Plants.id == id)
+    result = session.exec(statement).one()
     return result
 
 # CREATE data
 
+# for below!! where does the latinname interaction happen? 
+# I believe this is Plants not Plant, becuase it is calling the class not the model
 
 @app.post("/plants/add")
-async def add_plants(payload: Plants, session: Session = Depends(get_session)):
-    new_plant = Plants(
-        title=payload.title, 
-        common_name_id=payload.common_name,
-        scientific_name_id=payload.scientific_name,
-        date_of_purchase_id=payload.date_of_purchase,
-        location_of_purchase_id=payload.location_of_purchase,
-        condition_at_purchase_id=payload.condition_at_purchase,
-        current_condition_id=payload.current_condition)
+async def add_plant(payload: Plants, session: Session = Depends(get_session)):
+    new_plant = Plants(payload: commonname=payload.commonname, scientificname=payload.scientificname, locationpurchased=payload.locationpurchased, purchasedcondition=payload.purchasedcondition, datepurchased=payload.datepurchased, currentcondition=payload.currentcondition)
+
     session.add(new_plant)
     session.commit()
     session.refresh(new_plant)
