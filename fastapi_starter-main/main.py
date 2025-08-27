@@ -58,18 +58,20 @@ async def root():
       #  result_list.append(plant_details)
    # return result_list
 
-
-#try again. 
 @app.get("/plants")
 async def get_all_plants(session: Session = Depends(get_session)):
-   statement= select(Plants, CommonName, LocationPurchased).join(CommonName, Plants.commonname_id == CommonName.id).join(LocationPurchased, Plants.locationpurchased_id ==LocationPurchased.id)
+   statement= select(Plants, CommonName, CurrentCondition, DatePurchased, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName, Plants.commonname_id == CommonName.id).join(CurrentCondition, Plants.currentcondition_id == CurrentCondition.id).join(DatePurchased, Plants.datepurchased_id ==DatePurchased.id).join(LocationPurchased, Plants.locationpurchased_id ==LocationPurchased.id).join(PurchasedCondition, Plants.purchasedcondition_id ==PurchasedCondition.id).join(ScientificName, Plants.scientificname_id ==ScientificName.id)
    giveResults = session.exec(statement).all()
    
    result_list = []
-   for plant, common_name, location_purchased in giveResults:
+   for plant, common_name, current_condition, date_purchased, location_purchased, purchased_condition, scientific_name in giveResults:
        plant_details = {
            "common_name": common_name.name,
+           "current_condition": current_condition.condition,
+           "date_purchased": date_purchased.date,
            "location_purchased": location_purchased.location,
+           "purchased_condition": purchased_condition.history,
+           "scientific_name": scientific_name.latinName,
        }
        result_list.append(plant_details),
        return result_list
