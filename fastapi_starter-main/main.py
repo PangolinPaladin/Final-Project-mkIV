@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 
 from datetime import datetime, timedelta, timezone
-from sqlmodel import Session, select
+from sqlmodel import Session
 
 import config
 
@@ -60,7 +60,9 @@ async def root():
 
 @app.get("/plants")
 async def get_all_plants(session: Session = Depends(get_session)):
-    statement= select(Plants, CommonName, CurrentCondition, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName, Plants.commonname_id == CommonName.id).join(CurrentCondition, Plants.currentcondition_id == CurrentCondition.id).join(LocationPurchased, Plants.locationpurchased_id ==LocationPurchased.id).join(PurchasedCondition, Plants.purchasedcondition_id ==PurchasedCondition.id).join(ScientificName, Plants.scientificname_id ==ScientificName.id)
+    #statement= select(Plants, CommonName, CurrentCondition, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName, Plants.commonname_id == CommonName.id).join(CurrentCondition, Plants.currentcondition_id == CurrentCondition.id).join(LocationPurchased, Plants.locationpurchased_id ==LocationPurchased.id).join(PurchasedCondition, Plants.purchasedcondition_id ==PurchasedCondition.id).join(ScientificName, Plants.scientificname_id ==ScientificName.id
+    statement = select(Plants, CommonName, CurrentCondition, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName).join(CurrentCondition).join(
+        LocationPurchased).join(PurchasedCondition).join(ScientificName)
     giveResults = session.exec(statement).all()
    
     result_list = []
@@ -82,7 +84,8 @@ async def get_all_plants(session: Session = Depends(get_session)):
 
 @app.get("/plants/{id}")
 async def get_single_plant(id: str, session: Session = Depends(get_session)):
-    statement = select(Plants).where(Plants.id == id)
+    statement = select(Plants, CommonName, CurrentCondition, LocationPurchased, PurchasedCondition, ScientificName).join(CommonName).join(CurrentCondition).join(
+        LocationPurchased).join(PurchasedCondition).join(ScientificName).where(Plants.id == id)
     result = session.exec(statement).one()
     return result
 
