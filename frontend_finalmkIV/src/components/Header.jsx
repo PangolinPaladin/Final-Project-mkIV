@@ -15,6 +15,9 @@ const Header = () => {
           <nav class= "new-plant-container">
             <li> <Link to='/New_Plant'>New Plant</Link> </li> 
           </nav>
+          <nav class= "meet-the-creator">
+            <li> <Link to='/Meet_The_Creator'>Meet The Creator</Link> </li> 
+          </nav>
         </menu>
     </header>
   );

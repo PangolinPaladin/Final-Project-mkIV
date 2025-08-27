@@ -4,6 +4,7 @@ import Default_Layout from "./Structure/Default_Layout";
 import Main from "./pages/Main"
 import Full_Collection from "./pages/Full_Collection";
 import New_Plant from "./pages/New_Plant";
+import Meet_The_Creator from "./pages/Meet_The_Creator";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path='/' element={<Main />} />
         <Route path='/Full_Collection' element={<Full_Collection />} />
         <Route path='/New_Plant' element={<New_Plant />} />
+        <Route path='/Meet_The_Creator' element={<Meet_The_Creator />} />
       </Route>
     </Routes>
   );

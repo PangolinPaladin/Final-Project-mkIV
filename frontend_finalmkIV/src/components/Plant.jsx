@@ -20,4 +20,4 @@ const Plants = () => {
     )
 }
 
-// in active code
+// inactive code
